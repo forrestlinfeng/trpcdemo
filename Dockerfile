@@ -1,11 +1,11 @@
 ## build
-FROM golang:1.18-buster AS build-env
+FROM golang:alpine AS build-env
 
 COPY . /go/src/build
 
 WORKDIR /go/src/build
 
-RUN make build
+RUN env GOOS=linux go build -o trpcdemo
 
 ## run
 FROM alpine:3.9
