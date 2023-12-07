@@ -1,4 +1,4 @@
-module app.trpcdemo
+module trpc.app.HelloWorldService
 
 go 1.18
 

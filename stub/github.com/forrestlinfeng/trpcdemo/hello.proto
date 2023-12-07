@@ -1,7 +1,7 @@
 syntax = "proto3";
-package hello;
+package trpcdemo;
 
-option go_package = "github.com/some-repo/examples/hello";
+option go_package = "github.com/forrestlinfeng/trpcdemo";
 
 // HelloRequest is hello request.
 message HelloRequest {
@@ -13,8 +13,8 @@ message HelloResponse {
   string msg = 1;
 }
 
-// HelloWorldService handles hello request and echo message.
-service HelloWorldService {
+// Hello handles hello request and echo message.
+service Hello {
   // Hello says hello.
   rpc Hello(HelloRequest) returns(HelloResponse);
 }

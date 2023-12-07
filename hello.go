@@ -3,15 +3,15 @@ package main
 import (
 	"context"
 
-	pb "github.com/some-repo/examples/hello"
+	pb "github.com/forrestlinfeng/trpcdemo"
 )
 
-type helloWorldServiceImpl struct {
-	pb.UnimplementedHelloWorldService
+type helloImpl struct {
+	pb.UnimplementedHello
 }
 
 // Hello Hello says hello.
-func (s *helloWorldServiceImpl) Hello(
+func (s *helloImpl) Hello(
 	ctx context.Context,
 	req *pb.HelloRequest,
 ) (*pb.HelloResponse, error) {

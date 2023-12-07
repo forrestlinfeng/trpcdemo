@@ -5,24 +5,24 @@ import (
 	"reflect"
 	"testing"
 
+	pb "github.com/forrestlinfeng/trpcdemo"
 	"github.com/golang/mock/gomock"
-	pb "github.com/some-repo/examples/hello"
 	_ "trpc.group/trpc-go/trpc-go/http"
 )
 
 //go:generate go mod tidy
-//go:generate mockgen -destination=stub/github.com/some-repo/examples/hello/hello_mock.go -package=hello -self_package=github.com/some-repo/examples/hello --source=stub/github.com/some-repo/examples/hello/hello.trpc.go
+//go:generate mockgen -destination=stub/github.com/forrestlinfeng/trpcdemo/hello_mock.go -package=trpcdemo -self_package=github.com/forrestlinfeng/trpcdemo --source=stub/github.com/forrestlinfeng/trpcdemo/hello.trpc.go
 
-func Test_helloWorldServiceImpl_Hello(t *testing.T) {
+func Test_helloImpl_Hello(t *testing.T) {
 	// Start writing mock logic.
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
-	helloWorldServiceService := pb.NewMockHelloWorldServiceService(ctrl)
+	helloService := pb.NewMockHelloService(ctrl)
 	var inorderClient []*gomock.Call
 	// Expected behavior.
-	m := helloWorldServiceService.EXPECT().Hello(gomock.Any(), gomock.Any()).AnyTimes()
+	m := helloService.EXPECT().Hello(gomock.Any(), gomock.Any()).AnyTimes()
 	m.DoAndReturn(func(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
-		s := &helloWorldServiceImpl{}
+		s := &helloImpl{}
 		return s.Hello(ctx, req)
 	})
 	gomock.InOrder(inorderClient...)
@@ -44,11 +44,11 @@ func Test_helloWorldServiceImpl_Hello(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			var rsp *pb.HelloResponse
 			var err error
-			if rsp, err = helloWorldServiceService.Hello(tt.args.ctx, tt.args.req); (err != nil) != tt.wantErr {
-				t.Errorf("helloWorldServiceImpl.Hello() error = %v, wantErr %v", err, tt.wantErr)
+			if rsp, err = helloService.Hello(tt.args.ctx, tt.args.req); (err != nil) != tt.wantErr {
+				t.Errorf("helloImpl.Hello() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			if !reflect.DeepEqual(rsp, tt.args.rsp) {
-				t.Errorf("helloWorldServiceImpl.Hello() rsp got = %v, want %v", rsp, tt.args.rsp)
+				t.Errorf("helloImpl.Hello() rsp got = %v, want %v", rsp, tt.args.rsp)
 			}
 		})
 	}
