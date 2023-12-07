@@ -12,7 +12,7 @@ FROM alpine:3.9
 
 LABEL maintainer="linfengchen"
 
-RUN mkdir -p /app
+RUN apk add tcpdump net-tools busybox-extras && mkdir -p /app
 
 WORKDIR /app
 
