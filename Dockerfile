@@ -1,5 +1,5 @@
 ## build
-FROM golang:alpine AS build-env
+FROM ccr.ccs.tencentyun.com/dops/golang:alpine AS build-env
 
 COPY . /go/src/build
 
@@ -8,7 +8,7 @@ WORKDIR /go/src/build
 RUN env GOOS=linux go build -o trpcdemo
 
 ## run
-FROM alpine:3.9
+FROM ccr.ccs.tencentyun.com/dops/alpine:3.9
 
 LABEL maintainer="linfengchen"
 
