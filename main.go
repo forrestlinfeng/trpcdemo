@@ -10,7 +10,7 @@ import (
 
 func main() {
 	s := trpc.NewServer()
-	pb.RegisterHelloService(s.Service("trpcdemo.Hello"), &helloImpl{})
+	pb.RegisterHelloService(s.Service("trpcdemo.Hello"), NewHelloImpl())
 	if err := s.Serve(); err != nil {
 		log.Fatal(err)
 	}

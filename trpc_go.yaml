@@ -1,6 +1,9 @@
 global:  # Global configuration.
   namespace: Development  # Environment type, either Production or Development.
   env_name: test  # Environment name for non-production environments.
+  serverConnector:
+    addresses:
+      - 127.0.0.1:8091
 
 server:  # Server configuration.
   app: trpcdemo  # Application name for the business.
@@ -34,6 +37,10 @@ client:  # Backend configuration for client calls.
       target: ip://127.0.0.1:8000  # Service address for requests.
       timeout: 1000   # Maximum processing time for requests.
 
+config:
+  configConnector:
+    addresses:
+      - 127.0.0.1:8093
 
 plugins:  # Plugin configuration.
   log:  # Log configuration.
