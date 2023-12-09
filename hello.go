@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	pb "github.com/forrestlinfeng/trpcdemo"
 	"trpc.group/trpc-go/trpc-go"
@@ -26,7 +25,6 @@ func NewHelloImpl() pb.HelloService {
 
 	configFile, err := configAPI.GetConfigFile("Polaris", "test", "aa.json")
 	if err != nil {
-		fmt.Println("fail to get config.", err)
 		log.Errorf("fail to get config.", err)
 	}
 	s := &helloImpl{}
@@ -39,12 +37,10 @@ func NewHelloImpl() pb.HelloService {
 
 // Hello Hello says hello.
 func (s *helloImpl) Hello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
-	rsp := &pb.HelloResponse{}
-	rsp.Msg = s.val
-	return rsp, nil
+	return &pb.HelloResponse{Msg: s.val}, nil
 }
 
 func (s *helloImpl) changeListener(event model.ConfigFileChangeEvent) {
-	log.Errorf("received change event. %+v, value:%v", event, event.NewValue)
+	log.Infof("received change event. %+v, value:%v", event, event.NewValue)
 	s.val = event.NewValue
 }
