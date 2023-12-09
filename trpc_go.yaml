@@ -16,7 +16,7 @@ server:  # Server configuration.
     - recovery  # Intercept panics from business processing goroutines created by the framework.
   service:  # Services provided by the business, can have multiple.
     - name: trpcdemo.Hello  # Route name for the service.
-      ip: 127.0.0.1  # Service listening IP address, can use placeholder ${ip}. Use either ip or nic, ip takes priority.
+      ip: 0.0.0.0  # Service listening IP address, can use placeholder ${ip}. Use either ip or nic, ip takes priority.
       # nic: eth0
       port: 8000  # Service listening port, can use placeholder ${port}.
       network: tcp  # Network listening type: tcp or udp.
